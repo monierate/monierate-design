@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monierate — Style Reference</title>
+<meta name="description" content="Monierate design system: design.md, Tailwind v4 theme, CSS variables and W3C design tokens. Dense rate data in Crayola blue on clean white.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg-panel: #10161f;
+    --bg-raise: #161d28;
+    --line: rgba(255,255,255,.07);
+    --line-strong: rgba(255,255,255,.14);
+    --tx: #e6e9ee;
+    --tx-2: #9aa4b2;
+    --tx-3: #5c6570;
+    --scroll: rgba(255,255,255,.18);
+    --scroll-hover: rgba(255,255,255,.32);
+    --brand: #1f75fe;
+    --positive: #03d418;
+    --negative: #e31d1c;
+    --c-h: #79b8ff; --c-q: #7ee787; --c-cm: #5c6570;
+    --c-k: #ff9d76; --c-s: #7ee787; --c-v: #79b8ff; --c-t: #d2a8ff;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --sans: "Onest", "Inter", system-ui, sans-serif;
+  }
+  [data-theme="light"] {
+    --bg: #f7f8fa;
+    --bg-panel: #ffffff;
+    --bg-raise: #eef1f5;
+    --line: rgba(13,19,25,.09);
+    --line-strong: rgba(13,19,25,.18);
+    --tx: #101319;
+    --tx-2: #4c5563;
+    --tx-3: #8a94a1;
+    --scroll: rgba(13,19,25,.25);
+    --scroll-hover: rgba(13,19,25,.45);
+    --positive: #05a615;
+    --negative: #ce1312;
+    --c-h: #0550ae; --c-q: #116329; --c-cm: #8a94a1;
+    --c-k: #953800; --c-s: #116329; --c-v: #0550ae; --c-t: #6639ba;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { background: var(--bg); color: var(--tx); font-family: var(--sans); }
+  a { color: inherit; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 28px; font-size: 18px; font-weight: 500;
+    position: sticky; top: 0; z-index: 20; background: var(--bg);
+    border-bottom: 1px solid transparent;
+  }
+  .topbar .logo {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--brand); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px;
+  }
+  .topbar .crumb { color: var(--tx-3); }
+  .topbar .crumb-live { color: var(--tx); }
+
+  /* ---------- layout ---------- */
+  .wrap { display: grid; grid-template-columns: minmax(360px, 46%) 1fr; height: calc(100vh - 66px); }
+  @media (min-width: 981px) { body { overflow: hidden; } }
+  @media (max-width: 980px) {
+    .wrap { grid-template-columns: 1fr; height: auto; }
+    .left { height: auto !important; overflow: visible !important; }
+    .right { border-left: none !important; border-top: 1px solid var(--line); height: auto !important; }
+    .codewrap { max-height: 70vh; }
+  }
+
+  /* visible scrollbars per section */
+  .left, .codewrap { scrollbar-width: thin; scrollbar-color: var(--scroll) transparent; scrollbar-gutter: stable; }
+  .left::-webkit-scrollbar, .codewrap::-webkit-scrollbar { width: 10px; }
+  .left::-webkit-scrollbar-track, .codewrap::-webkit-scrollbar-track { background: transparent; }
+  .left::-webkit-scrollbar-thumb, .codewrap::-webkit-scrollbar-thumb {
+    background: var(--scroll); border-radius: 6px;
+    border: 2px solid var(--bg); background-clip: padding-box;
+  }
+  .left::-webkit-scrollbar-thumb:hover, .codewrap::-webkit-scrollbar-thumb:hover { background: var(--scroll-hover); border: 2px solid var(--bg); background-clip: padding-box; }
+  .codewrap::-webkit-scrollbar-thumb { border-color: var(--bg-panel); }
+
+  /* ---------- left panel ---------- */
+  .left { padding: 20px 36px 80px; height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+  .preview {
+    border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    background: #ffffff; margin-bottom: 34px;
+  }
+  /* live sample rendered with real tokens — mirrors monierate.com homepage */
+  .sample { font-family: "Instrument Sans", sans-serif; color: #000; background: #fff; }
+  .sample h1, .sample .s-cta, .sample .s-login, .sample .s-tab, .sample .s-card .s-ct { font-family: "Onest", sans-serif; }
+  .sample .s-announce {
+    background: #1f75fe; color: #fff; text-align: center;
+    font-size: 10px; font-weight: 500; padding: 8px 10px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .sample .s-announce .s-dl { background: #fff; color: #1f75fe; border-radius: 9999px; padding: 3px 10px; font-weight: 600; }
+  .sample .s-nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; gap: 8px; }
+  .sample .s-logo { font-weight: 700; font-size: 13.5px; letter-spacing: -.01em; display: flex; align-items: center; gap: 5px; }
+  .sample .s-logo .s-mark { width: 18px; height: 18px; border-radius: 5px; background: #1f75fe; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 9px; font-weight: 700; }
+  .sample .s-links { display: flex; gap: 11px; font-size: 10px; font-weight: 500; color: #737373; }
+  .sample .s-links .on { color: #1f75fe; }
+  .sample .s-authbox { display: flex; gap: 6px; align-items: center; }
+  .sample .s-login { border: 1px solid #f2f2f2; border-radius: 8px; font-size: 10px; font-weight: 500; padding: 5px 11px; }
+  .sample .s-cta { background: #1f75fe; color: #fff; border-radius: 8px; font-size: 10px; font-weight: 500; padding: 5px 12px; }
+  .sample .s-ticker {
+    display: flex; gap: 16px; overflow: hidden; white-space: nowrap;
+    border-top: 1px solid #f2f2f2; border-bottom: 1px solid #f2f2f2;
+    padding: 8px 18px; font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+  }
+  .sample .s-ticker .pair { color: #000; } .sample .s-ticker .v { color: #737373; }
+  .sample .s-up { color: #05a615; } .sample .s-down { color: #ce1312; }
+  .sample .s-body { padding: 16px 18px 20px; }
+  .sample h1 { font-size: 20px; font-weight: 700; letter-spacing: -.019em; line-height: 1.2; margin-bottom: 5px; }
+  .sample .s-sub { font-size: 10.5px; color: #737373; margin-bottom: 14px; }
+  .sample .s-sub a { color: #1f75fe; text-decoration: none; font-weight: 500; }
+  .sample .s-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+  .sample .s-card {
+    border: 1px solid #f2f2f2; border-radius: 10px; box-shadow: 0 4px 15px #f2f2f2;
+    padding: 10px 12px; background: #fff;
+  }
+  .sample .s-card .s-ct { font-size: 10.5px; font-weight: 600; margin-bottom: 6px; }
+  .sample .s-mini { display: flex; align-items: center; justify-content: space-between; font-size: 10px; font-weight: 500; padding: 4px 0; }
+  .sample .s-mini .s-prov { display: flex; align-items: center; gap: 6px; }
+  .sample .s-dot { width: 13px; height: 13px; border-radius: 50%; display: inline-block; flex: none; }
+  .sample .s-mini .s-rate { font-family: var(--mono); font-size: 9.5px; }
+  .sample .s-mini .s-per { color: #b3b0b0; font-size: 8.5px; }
+  .sample .s-tabs { display: flex; gap: 4px; border: 1px solid #f2f2f2; border-radius: 9999px; padding: 3px; width: max-content; margin-bottom: 12px; }
+  .sample .s-tab { font-size: 9.5px; font-weight: 600; padding: 4px 11px; border-radius: 9999px; color: #737373; }
+  .sample .s-tab.on { background: #fff; color: #000; box-shadow: 0 1px 4px rgba(0,0,0,.10); }
+  .sample .s-table { border: 1px solid #f2f2f2; border-radius: 10px; overflow: hidden; }
+  .sample .s-thead {
+    display: grid; grid-template-columns: 24px 1fr 80px 80px 70px; gap: 4px;
+    background: #f8f8f8; color: #737373; font-size: 8.5px; font-weight: 600; letter-spacing: .06em;
+    padding: 8px 12px; text-transform: uppercase;
+  }
+  .sample .s-trow { display: grid; grid-template-columns: 24px 1fr 80px 80px 70px; gap: 4px; align-items: center; padding: 9px 12px; font-size: 10.5px; font-weight: 600; }
+  .sample .s-trow + .s-trow { border-top: 1px solid #f2f2f2; }
+  .sample .s-trow .s-prov { display: flex; align-items: center; gap: 7px; }
+  .sample .s-trow .num { color: #737373; font-weight: 500; }
+  .sample .s-trow .s-rate { font-family: var(--mono); font-size: 10px; }
+  .sample .s-trow .s-per { display: block; color: #b3b0b0; font-size: 8px; font-family: var(--sans); font-weight: 500; }
+  .sample .s-trow .ago { color: #737373; font-size: 9.5px; font-weight: 500; text-align: right; }
+
+  .title { font-size: 52px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 10px; }
+  .tagline { color: var(--tx-2); font-size: 15px; margin-bottom: 22px; }
+  .desc { color: var(--tx-2); font-size: 15px; line-height: 1.75; max-width: 60ch; margin-bottom: 18px; }
+  .site-link { display: inline-flex; align-items: center; gap: 7px; color: var(--tx-2); font-size: 13.5px; text-decoration: none; margin-bottom: 44px; }
+  .site-link:hover { color: var(--tx); }
+
+  .sec-h { font-size: 22px; font-weight: 600; margin: 56px 0 6px; }
+  .sec-h:first-of-type { margin-top: 0; }
+  .grp-h { font-size: 12px; font-weight: 500; letter-spacing: .08em; color: var(--tx-3); text-transform: uppercase; margin: 26px 0 14px; }
+  .grp-h .note { float: right; text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+  .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 20px; }
+  .swatch .chip { height: 92px; border-radius: 12px; border: 1px solid var(--line); position: relative; }
+  .chip .copybtn {
+    position: absolute; inset: 0; margin: auto; width: max-content; height: max-content;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 14px; border-radius: 9999px; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    background: rgba(13,19,25,.78); color: #fff;
+    backdrop-filter: blur(4px);
+    opacity: 0; transform: translateY(4px); transition: opacity .15s, transform .15s;
+    pointer-events: none;
+  }
+  .chip:hover .copybtn, .chip .copybtn:focus-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .chip .copybtn:hover { background: rgba(13,19,25,.92); }
+  .chip.light-chip .copybtn { background: rgba(255,255,255,.88); color: #101319; }
+  .chip.light-chip .copybtn:hover { background: #ffffff; }
+  .swatch .nm { font-size: 14.5px; font-weight: 600; margin-top: 12px; }
+  .swatch .hx { font-size: 12.5px; color: var(--tx-3); font-family: var(--mono); cursor: pointer; margin: 3px 0 7px; }
+  .swatch .hx:hover { color: var(--tx); }
+  .swatch .role { font-size: 12.5px; color: var(--tx-2); line-height: 1.55; }
+
+  /* type scale */
+  .tscale { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-panel); overflow: hidden; }
+  .tstep { padding: 14px 20px 18px; }
+  .tstep + .tstep { border-top: 1px solid var(--line); }
+  .tstep .thead { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11.5px; color: var(--tx-3); margin-bottom: 8px; }
+  .tstep .spec { color: var(--tx); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tshow { display: block; width: 100%; text-align: center; padding: 12px; background: none; border: none; border-top: 1px solid var(--line); color: var(--tx-2); font-size: 12.5px; cursor: pointer; font-family: var(--sans); }
+  .tshow:hover { color: var(--tx); }
+  .tstep.hid { display: none; }
+
+  /* font card */
+  .font-card { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-panel); padding: 20px 24px 22px; margin-bottom: 14px; }
+  .font-card .kicker { font-size: 11px; letter-spacing: .08em; color: var(--tx-3); text-transform: uppercase; margin-bottom: 6px; }
+  .font-card .fname { font-size: 19px; font-weight: 600; margin-bottom: 16px; }
+  .font-card .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, auto)); gap: 8px 30px; margin-bottom: 14px; }
+  .font-card .cell .k { font-size: 12px; color: var(--tx-3); margin-bottom: 3px; }
+  .font-card .cell .v { font-size: 13.5px; }
+  .font-card .fb { border-top: 1px solid var(--line); padding-top: 12px; font-size: 13px; }
+  .font-card .fb .k { font-size: 12px; color: var(--tx-3); margin-bottom: 3px; }
+  .font-card .role { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 13px; font-size: 13.5px; color: var(--tx-2); line-height: 1.6; }
+
+  /* spec tables (spacing / radius) */
+  .spec-table { border: 1px solid var(--line); border-radius: 14px; background: var(--bg-panel); overflow: hidden; font-size: 13.5px; }
+  .spec-row { display: grid; grid-template-columns: 170px 110px 1fr; align-items: center; padding: 13px 20px; }
+  .spec-row + .spec-row { border-top: 1px solid var(--line); }
+  .spec-row.head { color: var(--tx-3); font-size: 12.5px; background: rgba(255,255,255,.015); }
+  .spec-row .val { font-family: var(--mono); font-size: 12.5px; color: var(--tx-2); }
+  .bar { height: 10px; border-radius: 3px; background: var(--tx-3); opacity: .55; }
+  .corner { width: 56px; height: 56px; border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); background: var(--bg-raise); }
+
+  /* elevation */
+  .elev-strip { background: #f8f8f8; border-radius: 14px; padding: 28px; display: flex; gap: 22px; flex-wrap: wrap; }
+  .elev-card { background: #fff; border: 1px solid #f2f2f2; border-radius: 10px; padding: 18px 20px; min-width: 150px; }
+  .elev-card .en { font-size: 13px; font-weight: 600; color: #000; margin-bottom: 3px; }
+  .elev-card .ev { font-family: var(--mono); font-size: 10.5px; color: #737373; }
+
+  /* guidelines */
+  .guide { margin-bottom: 8px; }
+  .guide li { list-style: none; display: flex; gap: 12px; font-size: 14px; color: var(--tx); line-height: 1.6; padding: 7px 0; }
+  .guide .ic { flex: none; font-weight: 600; }
+  .guide.do .ic { color: var(--positive); }
+  .guide.dont .ic { color: var(--negative); }
+
+  /* ---------- right panel ---------- */
+  .right {
+    border-left: 1px solid var(--line); background: var(--bg-panel);
+    display: flex; flex-direction: column; min-height: 0; height: 100%;
+  }
+  .tabs { display: flex; gap: 26px; padding: 0 28px; border-bottom: 1px solid var(--line); }
+  .tab {
+    padding: 17px 2px 14px; font-size: 13.5px; color: var(--tx-2); cursor: pointer;
+    border-bottom: 2px solid transparent; background: none; border-top: none; border-left: none; border-right: none;
+    font-family: var(--sans); font-weight: 500;
+  }
+  .tab.active { color: var(--tx); border-bottom-color: var(--tx); }
+  .subbar { display: flex; align-items: center; padding: 10px 28px; gap: 22px; border-bottom: 1px solid var(--line); }
+  .variant { font-size: 13px; color: var(--tx-2); cursor: pointer; padding: 6px 2px; background: none; border: none; font-family: var(--sans); border-bottom: 2px solid transparent; }
+  .variant.active { color: var(--tx); border-bottom-color: var(--tx); font-weight: 500; }
+  .subbar .spacer { flex: 1; }
+  .act {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px;
+    background: var(--bg-raise); color: var(--tx-2); border: 1px solid var(--line-strong);
+    padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: var(--sans);
+  }
+  .act:hover { color: var(--tx); }
+  .codewrap { overflow: auto; flex: 1; padding: 22px 28px 60px; overscroll-behavior: contain; }
+  pre.code { font-family: var(--mono); font-size: 12.5px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
+  .c-h { color: var(--c-h); } .c-q { color: var(--c-q); } .c-b { color: var(--tx); font-weight: 600; }
+  .c-cm { color: var(--c-cm); } .c-k { color: var(--c-k); } .c-s { color: var(--c-s); } .c-v { color: var(--c-v); }
+  .c-t { color: var(--c-t); }
+
+  .toast {
+    position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--bg-raise); border: 1px solid var(--line-strong); color: var(--tx);
+    padding: 9px 18px; border-radius: 10px; font-size: 13px; transition: transform .25s; z-index: 50;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="logo">M</span>
+    <span class="crumb">/</span><span class="crumb">Styles</span>
+    <span class="crumb">/</span><span class="crumb-live">Monierate</span>
+    <span style="flex:1"></span>
+    <button class="act" id="themeBtn" title="Toggle light/dark mode" aria-label="Toggle light/dark mode"><span id="themeIcon">&#9788;</span></button>
+  </div>
+
+  <div class="wrap">
+    <!-- ================= LEFT ================= -->
+    <div class="left">
+      <div class="preview">
+        <div class="sample">
+          <div class="s-announce"><span><b>Vban</b> · Get Paid Globally with Dollar</span><span class="s-dl">Download &#8594;</span></div>
+          <div class="s-nav">
+            <div class="s-logo"><span class="s-mark">M</span>monierate</div>
+            <div class="s-links"><span class="on">$1 Today</span><span>Converter</span><span>Black Market</span><span>CBN</span><span>Blog</span><span>API</span></div>
+            <div class="s-authbox"><span class="s-login">Login</span><span class="s-cta">Sign Up</span></div>
+          </div>
+          <div class="s-ticker">
+            <span><span class="pair">USD/NGN</span> <span class="v">1,391.86</span> <span class="s-up">&#9650; 0.06%</span></span>
+            <span><span class="pair">USDT/NGN</span> <span class="v">1,389.7</span> <span class="s-up">&#9650; 0.03%</span></span>
+            <span><span class="pair">BTC/NGN</span> <span class="v">88,674,610</span> <span class="s-down">&#9660; -0.53%</span></span>
+            <span><span class="pair">EUR/NGN</span> <span class="v">1,583.02</span> <span class="s-down">&#9660; -0.11%</span></span>
+            <span><span class="pair">GBP/NGN</span> <span class="v">1,850.51</span> <span class="s-down">&#9660; -0.12%</span></span>
+          </div>
+          <div class="s-body">
+            <h1>Today US Dollar to Nigerian Naira rates on exchanges</h1>
+            <div class="s-sub">The average rate for $1 is ₦1,391.857, compared to ₦1,384.053 a month ago. <a>Read More</a></div>
+            <div class="s-cards">
+              <div class="s-card">
+                <div class="s-ct">&#128293; Best Buy Rate</div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#0e5fd8"></span>Luno</span><span class="s-rate">₦ 1,390 <span class="s-per">per $1</span></span></div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#0d1117"></span>Bybit</span><span class="s-rate">₦ 1,390 <span class="s-per">per $1</span></span></div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#1f2a56"></span>Quidax</span><span class="s-rate">₦ 1,390 <span class="s-per">per $1</span></span></div>
+              </div>
+              <div class="s-card">
+                <div class="s-ct">&#128293; Best Sending Rate</div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#3a2ca8"></span>Remitly</span><span class="s-rate">₦ 1,410 <span class="s-per">per $1</span></span></div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#18a0fb"></span>Vban</span><span class="s-rate">₦ 1,387 <span class="s-per">per $1</span></span></div>
+                <div class="s-mini"><span class="s-prov"><span class="s-dot" style="background:#e94e77"></span>Zobo</span><span class="s-rate">₦ 1,387 <span class="s-per">per $1</span></span></div>
+              </div>
+            </div>
+            <div class="s-tabs">
+              <span class="s-tab on">USD</span><span class="s-tab">USDT</span><span class="s-tab">BTC</span><span class="s-tab">EUR</span><span class="s-tab">GBP</span>
+            </div>
+            <div class="s-table">
+              <div class="s-thead"><span>#</span><span>Provider</span><span>Buy</span><span>Sell</span><span style="text-align:right">Updated</span></div>
+              <div class="s-trow"><span class="num">1</span><span class="s-prov"><span class="s-dot" style="background:#0e5fd8"></span>Luno</span><span class="s-rate">₦1,390<span class="s-per">per $1</span></span><span class="s-rate">₦1,390<span class="s-per">per $1</span></span><span class="ago">Just now</span></div>
+              <div class="s-trow"><span class="num">2</span><span class="s-prov"><span class="s-dot" style="background:#0d1117"></span>Bybit</span><span class="s-rate">₦1,390<span class="s-per">per $1</span></span><span class="s-rate">₦1,389<span class="s-per">per $1</span></span><span class="ago">Just now</span></div>
+              <div class="s-trow"><span class="num">3</span><span class="s-prov"><span class="s-dot" style="background:#1f2a56"></span>Quidax</span><span class="s-rate">₦1,390<span class="s-per">per $1</span></span><span class="s-rate">₦1,389<span class="s-per">per $1</span></span><span class="ago">Just now</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="title">Monierate</div>
+      <div class="tagline">dense rate data in Crayola blue on clean white</div>
+      <p class="desc">Monierate renders currency-exchange data as a utilitarian, airy dashboard-site. White hairline-bordered cards float on near-white section canvases; a single saturated blue (#1F75FE) carries every interactive affordance while green and red are rationed strictly to rate movement. Typography is a three-instrument system with strict division of labor: Onest (600, -1% tracking) speaks in headings, buttons, and tab pills; Instrument Sans carries all body and UI text; JetBrains Mono owns every numeral — ticker prices, % changes, rate cells — so columns of naira figures align like a terminal. Components read as flat and data-first: 1px strokes, whisper shadows, 5px radii on inputs, 10px on cards, pill-shaped primary actions. Long-scroll pages always resolve into the same closing sequence — news, converter, CTA banner, deep footer.</p>
+      <a class="site-link" href="https://monierate.com" target="_blank" rel="noopener">&#8599; https://monierate.com</a>
+
+      <h2 class="sec-h">Color Palette</h2>
+      <div id="palette"></div>
+
+      <h2 class="sec-h">Typography</h2>
+      <div class="grp-h">Type Scale <span class="note">Onest heads · Instrument Sans body · JetBrains Mono rates</span></div>
+      <div class="tscale" id="tscale"></div>
+
+      <div class="grp-h">Fonts</div>
+      <div class="font-card">
+        <div class="kicker">Display · Headings · Buttons</div>
+        <div class="fname" style="font-family:'Onest'">Onest <span style="color:var(--tx-3); font-weight:400; font-size:14px">— --font-head</span></div>
+        <div class="grid">
+          <div class="cell"><div class="k">Weights</div><div class="v">600 (headings, buttons), 500 (subheads)</div></div>
+          <div class="cell"><div class="k">Sizes</div><div class="v">14–100px</div></div>
+          <div class="cell"><div class="k">Line height</div><div class="v">1.0–1.5</div></div>
+          <div class="cell"><div class="k">Letter spacing</div><div class="v">-1% global on headings; -1.9% at 24px</div></div>
+        </div>
+        <div class="fb"><div class="k">Fallback</div>Instrument Sans, or ui-sans-serif/system-ui stack</div>
+        <div class="role">The voice of the brand — applied to h1–h6 (600, -1% tracking), .button components, currency tab pills, and the rate figures inside highlight cards. Anywhere the product speaks a headline or asks for a click, it speaks Onest.</div>
+      </div>
+      <div class="font-card">
+        <div class="kicker">Body · UI · Navigation</div>
+        <div class="fname" style="font-family:'Instrument Sans'">Instrument Sans <span style="color:var(--tx-3); font-weight:400; font-size:14px">— --font-body</span></div>
+        <div class="grid">
+          <div class="cell"><div class="k">Weights</div><div class="v">400 (default), 500, 600</div></div>
+          <div class="cell"><div class="k">Sizes</div><div class="v">8–18px</div></div>
+          <div class="cell"><div class="k">Line height</div><div class="v">1.0 UI · 1.5 copy</div></div>
+          <div class="cell"><div class="k">Letter spacing</div><div class="v">-1% at 12px+, 0 below</div></div>
+        </div>
+        <div class="fb"><div class="k">Fallback</div>Inter, or ui-sans-serif/system-ui stack</div>
+        <div class="role">The workhorse — set as the default on body/html and explicitly on a, button, input, p, span, div. All copy, nav links, table provider names, form fields, and explainer sections. Everything that isn't a headline or a number.</div>
+      </div>
+      <div class="font-card">
+        <div class="kicker">Numerals · Rates · Ticker</div>
+        <div class="fname" style="font-family:'JetBrains Mono'">JetBrains Mono <span style="color:var(--tx-3); font-weight:400; font-size:14px">— --font-mono</span></div>
+        <div class="grid">
+          <div class="cell"><div class="k">Weights</div><div class="v">400 (ticker), 700 (rate cells)</div></div>
+          <div class="cell"><div class="k">Sizes</div><div class="v">12–17px</div></div>
+          <div class="cell"><div class="k">Line height</div><div class="v">1.0</div></div>
+          <div class="cell"><div class="k">Letter spacing</div><div class="v">0</div></div>
+        </div>
+        <div class="fb"><div class="k">Fallback</div>IBM Plex Mono, or ui-monospace stack</div>
+        <div class="role">Tabular integrity — every naira and dollar figure: the ticker strip prices and % changes, buy/sell cells in rate tables (bold, 17px desktop). Fixed-width digits keep columns of rates aligned like a terminal. If it's a number the user compares, it's mono.</div>
+      </div>
+
+      <h2 class="sec-h">Spacing &amp; Shape</h2>
+      <div class="grp-h">Spacing</div>
+      <div class="spec-table">
+        <div class="spec-row head"><span>Purpose</span><span>Value</span><span>Preview</span></div>
+        <div class="spec-row"><span>Density</span><span class="val">compact</span><span></span></div>
+        <div class="spec-row"><span>Base unit</span><span class="val">10px</span><span class="bar" style="width:10px"></span></div>
+        <div class="spec-row"><span>Max width</span><span class="val">1376px</span><span class="bar" style="width:100%"></span></div>
+        <div class="spec-row"><span>Section gap</span><span class="val">30–40px</span><span class="bar" style="width:120px"></span></div>
+        <div class="spec-row"><span>Card padding</span><span class="val">10–16px</span><span class="bar" style="width:48px"></span></div>
+        <div class="spec-row"><span>Element gap</span><span class="val">10px</span><span class="bar" style="width:30px"></span></div>
+      </div>
+
+      <div class="grp-h">Border Radius</div>
+      <div class="spec-table">
+        <div class="spec-row head"><span>Element</span><span>Value</span><span>Preview</span></div>
+        <div class="spec-row"><span>Chips / tags</span><span class="val">4px</span><span class="corner" style="border-top-left-radius:4px"></span></div>
+        <div class="spec-row"><span>Inputs / small cards</span><span class="val">5px</span><span class="corner" style="border-top-left-radius:5px"></span></div>
+        <div class="spec-row"><span>Medium cards</span><span class="val">8px</span><span class="corner" style="border-top-left-radius:8px"></span></div>
+        <div class="spec-row"><span>Cards / panels</span><span class="val">10px</span><span class="corner" style="border-top-left-radius:10px"></span></div>
+        <div class="spec-row"><span>Feature cards</span><span class="val">15px</span><span class="corner" style="border-top-left-radius:15px"></span></div>
+        <div class="spec-row"><span>Buttons / avatars</span><span class="val">9999px</span><span class="corner" style="border-top-left-radius:40px"></span></div>
+      </div>
+
+      <div class="grp-h">Elevation</div>
+      <div class="elev-strip">
+        <div class="elev-card" style="box-shadow:0 4px 15px #f2f2f2"><div class="en">Card</div><div class="ev">0 4 15 #F2F2F2</div></div>
+        <div class="elev-card" style="box-shadow:-1px 9px 15px rgb(0 0 0 / .10)"><div class="en">Dropdown / Float</div><div class="ev">-1 9 15 #000 10%</div></div>
+        <div class="elev-card" style="box-shadow:0 0 0 4px rgb(31 117 254 / .08)"><div class="en">Brand Glow</div><div class="ev">0 0 0 4 #1F75FE 8%</div></div>
+        <div class="elev-card" style="box-shadow:0 10px 28px rgb(39 84 186 / .10)"><div class="en">Elevated Brand</div><div class="ev">0 10 28 #2754BA 10%</div></div>
+      </div>
+
+      <h2 class="sec-h">Guidelines</h2>
+      <div class="grp-h">Do</div>
+      <ul class="guide do">
+        <li><span class="ic">&#10003;</span>Keep the font division of labor: Onest for h1–h6 and buttons (600), Instrument Sans for all body/UI (400), JetBrains Mono for every rate numeral (700 in tables)</li>
+        <li><span class="ic">&#10003;</span>Reserve #1F75FE for interactive elements only: buttons, links, active tabs, focus states, chart lines</li>
+        <li><span class="ic">&#10003;</span>Ration green (#03D418) and red (#E31D1C) strictly to rate movement — never decorative</li>
+        <li><span class="ic">&#10003;</span>Keep the 10px atomic unit for gaps and padding; step up through 15/20/25/30 for larger rhythm</li>
+        <li><span class="ic">&#10003;</span>Set -1% letter-spacing on all text 12–32px, tightening to -1.9% on 24px section headings</li>
+        <li><span class="ic">&#10003;</span>Pair 1px #F2F2F2 hairline borders with the 0 4 15 #F2F2F2 shadow — cards lift by wash, not by dark shadow</li>
+        <li><span class="ic">&#10003;</span>Use pill (9999px) radius on all primary and secondary buttons, 30–36px tall, 12–14px Medium labels</li>
+        <li><span class="ic">&#10003;</span>End every long-scroll page with the same sequence: Latest Exchange News → Currency Converter → CTA banner → footer</li>
+        <li><span class="ic">&#10003;</span>Carry the disclaimer pattern on every rate surface: "This is for informational purposes only."</li>
+      </ul>
+      <div class="grp-h">Don't</div>
+      <ul class="guide dont">
+        <li><span class="ic">&#10007;</span>Don't ship Aeonik TRIAL or the stray Figma kit fonts (Roboto, Satoshi, Public Sans, Codec Pro) — the stack is Onest + Instrument Sans + JetBrains Mono, nothing else</li>
+        <li><span class="ic">&#10007;</span>Don't set rate figures in a proportional font — comparison columns must stay mono for vertical alignment</li>
+        <li><span class="ic">&#10007;</span>Don't hard-code hex values — consume the tokens; the brand blue and greys should resolve from variables</li>
+        <li><span class="ic">&#10007;</span>Don't use blue on non-interactive decoration — if it's blue, it must be clickable or actively selected</li>
+        <li><span class="ic">&#10007;</span>Don't introduce new grays — the ramp is fixed: #000 → #737373 → #B3B0B0 → #DDD → #ECECEC → #F2F2F2 → #F8F8F8 → #FFF</li>
+        <li><span class="ic">&#10007;</span>Don't use true-black shadows on light surfaces — elevation is a gray or brand-tinted wash</li>
+        <li><span class="ic">&#10007;</span>Don't drift radii (3.7 / 8.4 / 13.3 / 22.9px come from scaled components) — snap to 4/5/8/10/15/9999</li>
+        <li><span class="ic">&#10007;</span>Don't set body copy at line-height 1.0 — UI text is 1.0, paragraphs are 1.5; mixing them flattens hierarchy</li>
+      </ul>
+    </div>
+
+    <!-- ================= RIGHT ================= -->
+    <div class="right">
+      <div class="tabs" id="tabs"></div>
+      <div class="subbar">
+        <span id="variants"></span>
+        <span class="spacer"></span>
+        <button class="act" id="copyBtn">&#10697; Copy</button>
+        <button class="act" id="dlBtn">&#8681; <span id="dlLabel">.md</span></button>
+      </div>
+      <div class="codewrap"><pre class="code" id="code"></pre></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+const FILES = {
+  "DESIGN.md": {
+    variants: { "Compact": "# Monierate — Style Reference (Compact)\n> dense rate data in Crayola blue on clean white\n\n**Theme:** light (companion mobile app: dark navy)\n\nMonierate renders currency data as a utilitarian, airy dashboard-site: hairline-bordered white cards on near-white canvases, one saturated blue doing all the interactive work, and green/red reserved strictly for rate movement. Type is a three-font system: Onest for headings and buttons (600, -1% tracking), Instrument Sans for body and UI, and JetBrains Mono for every numeral — ticker prices, rate tables, % changes.\n\n## Colors\n\n| Token | Value | Role |\n|---|---|---|\n| `brand` | `#1F75FE` | Buttons, links, active states, focus glow |\n| `brand-deep` | `#134698` | Gradient end, pressed states |\n| `ink` | `#000000` | Primary text |\n| `text-secondary` | `#737373` | Supporting copy |\n| `text-tertiary` | `#B3B0B0` | Metadata, placeholders |\n| `paper` | `#FFFFFF` | Cards, page canvas |\n| `surface` | `#F8F8F8` | Section backgrounds |\n| `surface-tint` | `#F2F7FF` | Brand-tinted panels |\n| `border` | `#F2F2F2` | Default hairline stroke |\n| `border-strong` | `#DDDDDD` | Inputs, dividers |\n| `positive` | `#03D418` | Rate up |\n| `negative` | `#E31D1C` | Rate down |\n| `warning` | `#EFB255` | Alerts |\n| `navy` | `#010C20` | Dark app surfaces, footer |\n\n## Typography — three-font system (all via Google Fonts)\n\n| Font | Token | Role |\n|---|---|---|\n| **Onest** | `--font-head` | h1–h6 (600, -1% LS), buttons (600), tab pills, highlight-card figures |\n| **Instrument Sans** | `--font-body` | Default on body/html + a/button/input/p/span/div — all UI and copy (400) |\n| **JetBrains Mono** | `--font-mono` | Every numeral: ticker prices, % changes, buy/sell table cells (bold, 17px desktop) |\n\n| Role | Font / Size / Weight | LH / LS |\n|---|---|---|\n| Micro label | Instrument Sans 10 · 500 | 1.0 / 0 |\n| UI default / table cell | Instrument Sans 12 · 500 | 1.0 / -1% |\n| Body | Instrument Sans 14 · 400–500 | 1.0–1.5 / -1% |\n| Rate numeral | JetBrains Mono 12–17 · 700 | 1.0 / 0 |\n| Card title | Onest 16 · 600 | 1.0 / -1% |\n| Subhead | Onest 18–20 · 500–600 | 1.0 / -1% |\n| Section heading | Onest 24 · 600 | 1.5 / -1.9% |\n| Page title | Onest 28–32 · 600 | 1.0 / -1% |\n| Hero | Onest 48 · 600 | 1.0 / -1% |\n| Display stat | Onest 80–100 · 600 | 1.0 / 0 |\n\n## Shape & Space\n\n- **Radius:** 5 (inputs/chips) · 10 (cards) · 50+ (pill buttons)\n- **Spacing scale:** 2 · 4/5 · 8 · **10 (default gap & padding)** · 15 · 20 · 25 · 30\n- **Borders:** 1px hairline `#F2F2F2`\n- **Shadows:** `0 4 15 #F2F2F2` (cards) · `0 0 0 rgba(31,117,254,.08)` (brand glow)\n- **Buttons:** pill, 30–36px tall, brand fill, white 12–14px Onest 600 label\n- **Gradients:** brand `#1F75FE→#134698`; bitcoin `#F9AA4B→#F7931A`\n\n## Layout\n\nDesktop 1512px, content column ~1372px; mobile 430px. Long-scroll pages end in News → Converter → CTA banner → footer (8 nav columns).\n", "Extended": "# Monierate — Style Reference (Extended)\n> dense rate data in Crayola blue on clean white\n\n**Theme:** light (companion mobile app runs a dark navy theme)\n\nMonierate renders currency-exchange data as a utilitarian, airy dashboard-site. White hairline-bordered cards float on near-white section canvases; a single saturated blue (#1F75FE) carries every interactive affordance — buttons, links, active tabs, focus glows — while green and red are rationed strictly to rate movement. Typography is a three-instrument system with strict division of labor: Onest (600, -1% tracking) speaks in headings, buttons, and tab pills; Instrument Sans carries all body and UI text; and JetBrains Mono owns every numeral — ticker prices, % changes, and rate-table cells — so columns of naira figures align like a terminal. Components read as flat and data-first: 1px #F2F2F2 strokes, whisper shadows, 5px radii on inputs, 10px on cards, and fully-round pills for primary actions. Pages are long-scroll editorial stacks that always resolve into the same closing sequence — Latest Exchange News, a currency converter module, a full-bleed CTA banner, then a deep 8-column footer.\n\n---\n\n## Tokens — Colors\n\n| Name | Value | Token | Role |\n|---|---|---|---|\n| Crayola Blue | `#1F75FE` | `--color-brand` | Primary buttons, links, active tabs, chart lines, focus glow — the only interactive hue in the system |\n| Royal Navy | `#134698` | `--color-brand-deep` | Deep end of the brand gradient, pressed/hover states |\n| Ice Blue | `#F2F7FF` | `--color-brand-tint` | Brand-tinted card and banner backgrounds |\n| Powder Blue | `#EDF0F4` | `--color-surface-cool` | Table headers, cool panels, chart plot areas |\n| Ink Black | `#000000` | `--color-ink` | Primary text, headline numerals |\n| Slate Gray | `#737373` | `--color-text-secondary` | Supporting copy, rate context lines, timestamps |\n| Silver Gray | `#B3B0B0` | `--color-text-tertiary` | Metadata, placeholders, disabled labels; also mid-weight strokes |\n| Dim Gray | `#A3A3A3` / `#858585` | `--color-text-muted` | Least-emphasized captions |\n| Paper White | `#FFFFFF` | `--color-paper` | Page canvas, cards, button labels — the dominant surface |\n| Fog White | `#F8F8F8` | `--color-surface` | Alternating section backgrounds |\n| Snow | `#FBFBFB` / `#FAFAFA` | `--color-surface-raised` | Card fills one step off white, hover surfaces |\n| Mist Gray | `#F2F2F2` | `--color-border` | The default hairline stroke (2,465 uses) and the card shadow tint |\n| Pale Gray | `#ECECEC` / `#E9E9E9` | `--color-border-soft` | Inner dividers |\n| Gainsboro | `#DDDDDD` | `--color-border-strong` | Input outlines, emphasized dividers |\n| Signal Green | `#03D418` | `--color-positive` | Rate increase, positive % change chips |\n| Forest Green | `#05A615` | `--color-positive-deep` | Positive text on light green washes |\n| Signal Red | `#E31D1C` | `--color-negative` | Rate decrease, negative % change |\n| Crimson | `#CE1312` | `--color-negative-deep` | Negative text, error states |\n| Amber | `#EFB255` | `--color-warning` | Alert accents |\n| Midnight Navy | `#010C20` | `--color-navy` | Dark app theme canvas, dark footer |\n| Deep Space | `#0E182B` / `#263238` | `--color-navy-raised` | Dark theme cards and panels |\n\n### Gradients\n\n| Token | Stops | Role |\n|---|---|---|\n| `--gradient-brand` | `#1F75FE → #134698` (linear) | Hero panels, feature cards, primary banners |\n| `--gradient-bitcoin` | `#F9AA4B → #F7931A` (linear) | Bitcoin product surfaces |\n| `--gradient-alt` | `#46EFFA → #2000E3` (linear) | Occasional promo art |\n\n---\n\n## Tokens — Typography\n\nA three-font system with strict division of labor, all loaded from Google Fonts. (The Figma source file is ~95% Onest; production deliberately splits the roles below — follow production.)\n\n### Onest — display, headings, and actions — `--font-head`\n- **Substitute:** Instrument Sans, or ui-sans-serif/system-ui stack\n- **Weights:** 600 (SemiBold — the heading weight), 500 for softer subheads\n- **Applied to:** `h1–h6` (600, -1% tracking), `.button` components (600, 14px), currency tab pills, rate figures inside highlight cards\n- **Line height:** 1.0–1.3 headings; 1.5 at 24px section headings\n- **Letter spacing:** -1% (set globally on headings); -1.9% at 24px; 0 on display numerals\n- **Role:** The voice of the brand — anywhere the product speaks a headline or asks for a click.\n\n### Instrument Sans — body, UI, and navigation — `--font-body`\n- **Substitute:** Inter, or ui-sans-serif/system-ui stack\n- **Weights:** 400 (default), 500 (emphasis), 600 (labels)\n- **Applied to:** `body, html` default plus explicitly on `a, button, input, p, span, div` — all copy, nav links, table provider names, form fields, explainer sections\n- **Line height:** 1.0 for dense UI; 1.5 for paragraphs\n- **Role:** The workhorse — everything that isn't a headline or a number.\n\n### JetBrains Mono — numerals and rates — `--font-mono`\n- **Substitute:** IBM Plex Mono, or ui-monospace stack\n- **Weights:** 400 (ticker), 700 (rate cells)\n- **Applied to:** ticker strip pair prices and % changes (green/red), buy/sell cells in rate tables (`font-bold`, 17px desktop), every naira/dollar figure\n- **Role:** Tabular integrity — fixed-width digits keep columns of rates aligned like a terminal. If it's a number the user compares, it's mono.\n\nStray fonts present in the Figma file (flag assets, unreplaced kit pieces) that should NOT ship: Roboto Bold, **Aeonik TRIAL** (unlicensed trial), Groteska, Lexend, Arial, Satoshi, Public Sans, Codec Pro.\n\n### Type Scale\n\n| Role | Font | Size | Weight | Line Height | Letter Spacing | Token |\n|---|---|---|---|---|---|---|\n| Micro caption | Instrument Sans | 8px | 500 | 1.0 | -1% | `--text-2xs` |\n| Micro label / tag | Instrument Sans | 10px | 500 | 1.0 | 0 | `--text-xs` |\n| UI default / table cell | Instrument Sans | 12px | 500 | 1.0 | -1% | `--text-sm` |\n| Body / row text | Instrument Sans | 14px | 400–500 | 1.0 (UI) / 1.5 (copy) | -1% | `--text-base` |\n| Rate numeral | JetBrains Mono | 12–14px | 400–700 | 1.0 | 0 | `--text-rate` |\n| Rate numeral lg (desktop tables) | JetBrains Mono | 17px | 700 | 1.0 | 0 | `--text-rate-lg` |\n| Emphasized body / card title | Onest | 16px | 600 | 1.0 | -1% | `--text-md` |\n| Subhead | Onest | 18px | 500 | 1.0 | -1% | `--text-lg` |\n| Card heading | Onest | 20px | 600 | 1.0 | -1% | `--text-xl` |\n| Section heading | Onest | 24px | 600 | 1.5 | -1.9% | `--text-2xl` |\n| Page title | Onest | 28px | 500–600 | 1.0 | -1% | `--text-3xl` |\n| Large page title | Onest | 32px | 600 | 1.0 | -1% to -3% | `--text-4xl` |\n| Hero headline | Onest | 48px | 600 | 1.0 | -1% | `--text-5xl` |\n| Display stat | Onest | 80px | 600 | 1.0 | 0 | `--text-display` |\n| Display stat XL | Onest | 100px | 600 | 1.0 | 0 | `--text-display-xl` |\n\n---\n\n## Tokens — Spacing\n\n10px is the system's atomic unit: it is simultaneously the default auto-layout gap (5,734 uses) and the default padding (11,616 uses).\n\n| Token | Value | Role |\n|---|---|---|\n| `--space-2xs` | 2px | Icon-to-text micro gaps |\n| `--space-xs` | 4–5px | Chip internals, tight stacks |\n| `--space-sm` | 8px | Small element gaps |\n| `--space-md` | **10px** | Default gap and padding everywhere |\n| `--space-lg` | 15–16px | Card internals |\n| `--space-xl` | 20px | Card-to-card gaps |\n| `--space-2xl` | 25px | Section internals |\n| `--space-3xl` | 30–32px | Section padding |\n| `--space-4xl` | 40px+ | Page-level rhythm |\n\n## Tokens — Radius\n\n| Token | Value | Role |\n|---|---|---|\n| `--radius-xs` | 2px | Micro chips, checkbox |\n| `--radius-sm` | 4px | Tags, small buttons |\n| `--radius-md` | **5px** | The default — inputs, chips, small cards (3,056 uses) |\n| `--radius-lg` | 8px | Buttons, medium cards |\n| `--radius-xl` | 10px | Cards, panels (1,121 uses) |\n| `--radius-2xl` | 15px | Large feature cards |\n| `--radius-full` | 50px / 9999px | Pill buttons, avatars, toggles |\n\n## Tokens — Borders & Elevation\n\n| Token | Value | Role |\n|---|---|---|\n| `--border-hairline` | 1px solid `#F2F2F2` | Default card/table stroke (3,847 × 1px strokes) |\n| `--border-input` | 1px solid `#DDDDDD` | Form fields |\n| `--border-focus` | 1.5px solid `#1F75FE` | Focused/active elements |\n| `--shadow-card` | `0 4px 15px #F2F2F2` | Default card lift — a gray wash, not a true shadow |\n| `--shadow-float` | `-1px 9px 15px rgba(0,0,0,.10)` | Dropdowns, floating panels |\n| `--shadow-brand-glow` | `0 0 0 rgba(31,117,254,.08–.10)` | Blue halo on active converter/CTA cards |\n| `--shadow-brand-card` | `0 10px 28px rgba(39,84,186,.10)` | Elevated brand-blue cards |\n\n---\n\n## Components\n\n- **Buttons:** pill (`--radius-full`), 30–36px tall, `--color-brand` fill, white 12–14px Onest 600 label; secondary = white fill + hairline border; tab triplet **BUY / SELL / SEND** as segmented control.\n- **Rate table row:** provider logo + flag chip, provider name (Instrument Sans), rate figures (JetBrains Mono 700, 17px desktop), % change chip in `--color-positive`/`--color-negative`, 1px `#F2F2F2` row divider.\n- **Ticker strip:** header-level pair prices (USD/NGN, USDT/NGN, BTC/NGN…) in JetBrains Mono 400 with green/red arrows for movement.\n- **Converter module:** Amount / From / To selects with flag icons, big result line (\"1 US Dollar = 1,510 Nigerian Naira\"), rate-source disclaimer in `--color-text-secondary`, cross-rate tables (1/5/10/25/50 units).\n- **Highlight card** (+ 394×185 mobile variant): stat headline, trend chip, sparkline.\n- **Currency selectors:** full country-flag component set (60+ flags: `NG - Nigeria`, `GH - Ghana`, `US`, `GB-UKM`, …).\n- **Pagination:** First / Prev / Next icon components + \"Showing 1 to 100 of 14,639 results\".\n- **Pricing card** (API page): tier name, large price (\"$9\"), feature checklist, pill CTA — 3-across grid.\n- **Alert subscription:** email input + cadence picker (\"Every Monday\") + Telegram CTA.\n- **Nav:** desktop header with mega-menu columns; `Mobile Nav` bottom bar (Home / Wallet / Profile) at 430×68.\n- **iOS kit:** status bars (battery/charge/dark variants), home indicator — for app mockups.\n\n## Layout\n\n- **Desktop:** 1512px canvas (MacBook Pro 16); content column ~1,372–1,412px; some legacy frames at 1440px.\n- **Mobile web:** 430px (iPhone 14/15 Pro Max), one legacy 375px frame; pages run 3,400–8,500px tall.\n- **Mobile app:** 430×956 dark-theme frames; bottom-nav 3-tab shell.\n- **Page skeleton:** hero/title block → content modules → Latest Exchange News → Currency Converter → CTA banner (\"Sending money from Nigeria to your supplier abroad just got easier\" / \"Contact us now\") → footer.\n- **Footer IA:** Company · Service · Tools · Send & Receive Money · Bitcoin · Resources · Legal · Donation.\n\n## Voice & Content Patterns\n\n- Sentence-case headings with benefit-led phrasing (\"Stay Ahead with Monierate\", \"Access Our API: Power Your Solutions\").\n- Data timestamps carry full precision: \"Last updated Thu Sep 05 2024 16:25:35 GMT+0100 (West Africa Standard Time)\".\n- Every rate surface carries the disclaimer pattern: \"This is for informational purposes only.\"\n- ALL-CAPS reserved for the CTA banner and footer column headers.\n\n## Implementation Notes & Cleanup\n\n1. Replace Aeonik TRIAL before shipping; purge Roboto/Satoshi/Public Sans strays. When implementing from the Figma file, map its all-Onest text to the production stack: headings/buttons stay Onest, body/UI becomes Instrument Sans, and all rate numerals become JetBrains Mono.\n2. Promote raw hex usage (thousands of hard-coded `#1F75FE`, `#F2F2F2`) into the variable set (only ~23 variables exist today).\n3. Normalize radius drift (3.7 / 8.4 / 13.3 / 22.9px from scaled components) to the 4/5/8/10/50 scale.\n4. Fix design-copy typos: \"Exchages\", \"informatoin\", \"1 nGN\"/\"uSD\" casing; reconcile mismatched sample rates (1510 vs 1607.16 NGN on one page).\n5. Rename `Frame 16188xxxxx` working frames and deduplicate the ten \"compare exchange page\" frames.\n" },
+    lang: "md", ext: ".md", names: { "Compact": "design.compact.md", "Extended": "design.extended.md" }
+  },
+  "Tailwind v4": {
+    variants: { "Theme": "/* GENERATED from tokens/monierate.json — do not edit by hand.\n   Edit tokens in Figma (Tokens Studio) or tokens/monierate.json and run: npm run build */\n/* Usage: @import \"tailwindcss\"; @import \"./monierate.tailwind.css\"; */\n\n@theme {\n  --color-brand: #1F75FE; /* Crayola Blue — buttons, links, active tabs, focus glow */\n  --color-brand-deep: #134698; /* Royal Navy — gradient end, pressed states */\n  --color-brand-tint: #F2F7FF; /* Ice Blue — brand-tinted panels and banners */\n  --color-ink: #000000; /* Primary text */\n  --color-text-secondary: #737373; /* Supporting copy, timestamps */\n  --color-text-tertiary: #B3B0B0; /* Metadata, placeholders, disabled */\n  --color-text-muted: #A3A3A3; /* Least-emphasized captions */\n  --color-paper: #FFFFFF; /* Page canvas, cards */\n  --color-surface: #F8F8F8; /* Alternating section backgrounds */\n  --color-surface-raised: #FBFBFB; /* Card fill one step off white */\n  --color-surface-hover: #FAFAFA; /* Hover surfaces */\n  --color-surface-cool: #EDF0F4; /* Table headers, chart plot areas */\n  --color-border: #F2F2F2; /* Default hairline stroke */\n  --color-border-soft: #ECECEC; /* Inner dividers */\n  --color-border-strong: #DDDDDD; /* Input outlines */\n  --color-positive: #03D418; /* Rate up */\n  --color-positive-deep: #05A615; /* Positive text on washes */\n  --color-negative: #E31D1C; /* Rate down */\n  --color-negative-deep: #CE1312; /* Error text */\n  --color-warning: #EFB255; /* Alert accents */\n  --color-navy: #010C20; /* Dark app canvas, dark footer */\n  --color-navy-raised: #0E182B; /* Dark theme cards */\n  --color-navy-panel: #263238; /* Dark secondary panels */\n  --font-head: Onest, sans-serif; /* h1–h6 (600, -1% LS), buttons, tab pills */\n  --font-body: Instrument Sans, sans-serif; /* Default UI and copy */\n  --font-mono: JetBrains Mono, monospace; /* All numerals: ticker, rate cells */\n  --text-2xs: 8px;\n  --text-xs: 10px;\n  --text-sm: 12px;\n  --text-base: 14px;\n  --text-md: 16px;\n  --text-rate-lg: 17px; /* Desktop rate-table cells (mono 700) */\n  --text-lg: 18px;\n  --text-xl: 20px;\n  --text-2xl: 24px;\n  --text-3xl: 28px;\n  --text-4xl: 32px;\n  --text-5xl: 48px;\n  --text-display: 80px;\n  --text-display-xl: 100px;\n  --spacing-2xs: 2px;\n  --spacing-xs: 4px;\n  --spacing-sm: 8px;\n  --spacing-md: 10px; /* Atomic unit — default gap and padding */\n  --spacing-lg: 15px;\n  --spacing-xl: 20px;\n  --spacing-2xl: 25px;\n  --spacing-3xl: 30px;\n  --spacing-4xl: 40px;\n  --radius-xs: 2px;\n  --radius-sm: 4px;\n  --radius-md: 5px; /* Default — inputs, chips, small cards */\n  --radius-lg: 8px;\n  --radius-xl: 10px; /* Cards, panels */\n  --radius-2xl: 15px;\n  --radius-full: 9999px; /* Pill buttons, avatars */\n  --shadow-card: 0px 4px 15px #F2F2F2; /* Default card lift */\n  --shadow-float: -1px 9px 15px rgb(0 0 0 / 0.10); /* Dropdowns, floating panels */\n  --shadow-brand-glow: 0px 0px 0px 4px rgb(31 117 254 / 0.08); /* Blue halo on active cards */\n  --shadow-brand-card: 0px 10px 28px rgb(39 84 186 / 0.10); /* Elevated brand cards */\n  --breakpoint-mobile: 430px;\n  --breakpoint-desktop: 1512px;\n  --size-button-sm: 30px;\n  --size-button-md: 36px;\n  --size-button-lg: 50px;\n  --size-mobile-nav: 68px;\n  --font-sans: var(--font-body); /* body/UI default */\n}\n\n@layer base {\n  h1, h2, h3, h4, h5, h6 {\n    font-family: var(--font-head);\n    font-weight: 600;\n    letter-spacing: -0.01em;\n  }\n}\n\n@layer components {\n  .btn-primary {\n    display: inline-flex; align-items: center; justify-content: center;\n    height: var(--size-button-md); padding-inline: var(--spacing-xl);\n    border-radius: var(--radius-full); background: var(--color-brand);\n    color: var(--color-paper); font-family: var(--font-head);\n    font-size: var(--text-base); font-weight: 600; letter-spacing: -0.01em;\n  }\n  .btn-secondary {\n    display: inline-flex; align-items: center; justify-content: center;\n    height: var(--size-button-md); padding-inline: var(--spacing-xl);\n    border-radius: var(--radius-full); background: var(--color-paper);\n    border: 1px solid var(--color-border); color: var(--color-ink);\n    font-family: var(--font-head); font-size: var(--text-base); font-weight: 600;\n  }\n  .rate-numeral { font-family: var(--font-mono); font-weight: 700; font-variant-numeric: tabular-nums; }\n  .rate-up   { color: var(--color-positive); }\n  .rate-down { color: var(--color-negative); }\n  .gradient-brand   { background-image: linear-gradient(135deg, var(--color-brand), var(--color-brand-deep)); }\n}\n" },
+    lang: "css", ext: ".css", names: { "Theme": "monierate.tailwind.css" }
+  },
+  "CSS Variables": {
+    variants: { "Variables": "/* GENERATED from tokens/monierate.json — do not edit by hand.\n   Edit tokens in Figma (Tokens Studio) or tokens/monierate.json and run: npm run build */\n\n:root {\n  --color-brand: #1F75FE; /* Crayola Blue — buttons, links, active tabs, focus glow */\n  --color-brand-deep: #134698; /* Royal Navy — gradient end, pressed states */\n  --color-brand-tint: #F2F7FF; /* Ice Blue — brand-tinted panels and banners */\n  --color-ink: #000000; /* Primary text */\n  --color-text-secondary: #737373; /* Supporting copy, timestamps */\n  --color-text-tertiary: #B3B0B0; /* Metadata, placeholders, disabled */\n  --color-text-muted: #A3A3A3; /* Least-emphasized captions */\n  --color-paper: #FFFFFF; /* Page canvas, cards */\n  --color-surface: #F8F8F8; /* Alternating section backgrounds */\n  --color-surface-raised: #FBFBFB; /* Card fill one step off white */\n  --color-surface-hover: #FAFAFA; /* Hover surfaces */\n  --color-surface-cool: #EDF0F4; /* Table headers, chart plot areas */\n  --color-border: #F2F2F2; /* Default hairline stroke */\n  --color-border-soft: #ECECEC; /* Inner dividers */\n  --color-border-strong: #DDDDDD; /* Input outlines */\n  --color-positive: #03D418; /* Rate up */\n  --color-positive-deep: #05A615; /* Positive text on washes */\n  --color-negative: #E31D1C; /* Rate down */\n  --color-negative-deep: #CE1312; /* Error text */\n  --color-warning: #EFB255; /* Alert accents */\n  --color-navy: #010C20; /* Dark app canvas, dark footer */\n  --color-navy-raised: #0E182B; /* Dark theme cards */\n  --color-navy-panel: #263238; /* Dark secondary panels */\n  --font-head: Onest, sans-serif; /* h1–h6 (600, -1% LS), buttons, tab pills */\n  --font-body: Instrument Sans, sans-serif; /* Default UI and copy */\n  --font-mono: JetBrains Mono, monospace; /* All numerals: ticker, rate cells */\n  --text-2xs: 8px;\n  --text-xs: 10px;\n  --text-sm: 12px;\n  --text-base: 14px;\n  --text-md: 16px;\n  --text-rate-lg: 17px; /* Desktop rate-table cells (mono 700) */\n  --text-lg: 18px;\n  --text-xl: 20px;\n  --text-2xl: 24px;\n  --text-3xl: 28px;\n  --text-4xl: 32px;\n  --text-5xl: 48px;\n  --text-display: 80px;\n  --text-display-xl: 100px;\n  --spacing-2xs: 2px;\n  --spacing-xs: 4px;\n  --spacing-sm: 8px;\n  --spacing-md: 10px; /* Atomic unit — default gap and padding */\n  --spacing-lg: 15px;\n  --spacing-xl: 20px;\n  --spacing-2xl: 25px;\n  --spacing-3xl: 30px;\n  --spacing-4xl: 40px;\n  --radius-xs: 2px;\n  --radius-sm: 4px;\n  --radius-md: 5px; /* Default — inputs, chips, small cards */\n  --radius-lg: 8px;\n  --radius-xl: 10px; /* Cards, panels */\n  --radius-2xl: 15px;\n  --radius-full: 9999px; /* Pill buttons, avatars */\n  --shadow-card: 0px 4px 15px #F2F2F2; /* Default card lift */\n  --shadow-float: -1px 9px 15px rgb(0 0 0 / 0.10); /* Dropdowns, floating panels */\n  --shadow-brand-glow: 0px 0px 0px 4px rgb(31 117 254 / 0.08); /* Blue halo on active cards */\n  --shadow-brand-card: 0px 10px 28px rgb(39 84 186 / 0.10); /* Elevated brand cards */\n  --breakpoint-mobile: 430px;\n  --breakpoint-desktop: 1512px;\n  --size-button-sm: 30px;\n  --size-button-md: 36px;\n  --size-button-lg: 50px;\n  --size-mobile-nav: 68px;\n}\n\n/* Dark theme (mobile app / footer) */\n[data-theme=\"dark\"] {\n  --color-paper: var(--color-navy);\n  --color-surface: var(--color-navy-raised);\n  --color-surface-raised: var(--color-navy-panel);\n  --color-ink: #ffffff;\n  --color-text-secondary: var(--color-text-tertiary);\n  --color-border: rgb(255 255 255 / 0.08);\n}\n" },
+    lang: "css", ext: ".css", names: { "Variables": "monierate.variables.css" }
+  },
+  "Design Tokens": {
+    variants: { "Compact": "{\n  \"$description\": \"Monierate design tokens — compact set (W3C design tokens format)\",\n  \"color\": {\n    \"brand\": { \"$type\": \"color\", \"$value\": \"#1F75FE\" },\n    \"brand-deep\": { \"$type\": \"color\", \"$value\": \"#134698\" },\n    \"ink\": { \"$type\": \"color\", \"$value\": \"#000000\" },\n    \"text-secondary\": { \"$type\": \"color\", \"$value\": \"#737373\" },\n    \"text-tertiary\": { \"$type\": \"color\", \"$value\": \"#B3B0B0\" },\n    \"paper\": { \"$type\": \"color\", \"$value\": \"#FFFFFF\" },\n    \"surface\": { \"$type\": \"color\", \"$value\": \"#F8F8F8\" },\n    \"surface-tint\": { \"$type\": \"color\", \"$value\": \"#F2F7FF\" },\n    \"border\": { \"$type\": \"color\", \"$value\": \"#F2F2F2\" },\n    \"border-strong\": { \"$type\": \"color\", \"$value\": \"#DDDDDD\" },\n    \"positive\": { \"$type\": \"color\", \"$value\": \"#03D418\" },\n    \"negative\": { \"$type\": \"color\", \"$value\": \"#E31D1C\" },\n    \"warning\": { \"$type\": \"color\", \"$value\": \"#EFB255\" },\n    \"navy\": { \"$type\": \"color\", \"$value\": \"#010C20\" }\n  },\n  \"font\": {\n    \"family\": {\n      \"head\": { \"$type\": \"fontFamily\", \"$value\": [\"Onest\", \"sans-serif\"] },\n      \"body\": { \"$type\": \"fontFamily\", \"$value\": [\"Instrument Sans\", \"sans-serif\"] },\n      \"mono\": { \"$type\": \"fontFamily\", \"$value\": [\"JetBrains Mono\", \"monospace\"] }\n    },\n    \"weight\": {\n      \"regular\": { \"$type\": \"fontWeight\", \"$value\": 400 },\n      \"medium\": { \"$type\": \"fontWeight\", \"$value\": 500 },\n      \"semibold\": { \"$type\": \"fontWeight\", \"$value\": 600 },\n      \"bold\": { \"$type\": \"fontWeight\", \"$value\": 700 }\n    },\n    \"size\": {\n      \"xs\": { \"$type\": \"dimension\", \"$value\": \"10px\" },\n      \"sm\": { \"$type\": \"dimension\", \"$value\": \"12px\" },\n      \"base\": { \"$type\": \"dimension\", \"$value\": \"14px\" },\n      \"md\": { \"$type\": \"dimension\", \"$value\": \"16px\" },\n      \"lg\": { \"$type\": \"dimension\", \"$value\": \"18px\" },\n      \"xl\": { \"$type\": \"dimension\", \"$value\": \"20px\" },\n      \"2xl\": { \"$type\": \"dimension\", \"$value\": \"24px\" },\n      \"3xl\": { \"$type\": \"dimension\", \"$value\": \"28px\" },\n      \"4xl\": { \"$type\": \"dimension\", \"$value\": \"32px\" },\n      \"5xl\": { \"$type\": \"dimension\", \"$value\": \"48px\" },\n      \"display\": { \"$type\": \"dimension\", \"$value\": \"100px\" }\n    }\n  },\n  \"space\": {\n    \"xs\": { \"$type\": \"dimension\", \"$value\": \"4px\" },\n    \"sm\": { \"$type\": \"dimension\", \"$value\": \"8px\" },\n    \"md\": { \"$type\": \"dimension\", \"$value\": \"10px\" },\n    \"lg\": { \"$type\": \"dimension\", \"$value\": \"15px\" },\n    \"xl\": { \"$type\": \"dimension\", \"$value\": \"20px\" },\n    \"2xl\": { \"$type\": \"dimension\", \"$value\": \"30px\" }\n  },\n  \"radius\": {\n    \"md\": { \"$type\": \"dimension\", \"$value\": \"5px\" },\n    \"lg\": { \"$type\": \"dimension\", \"$value\": \"8px\" },\n    \"xl\": { \"$type\": \"dimension\", \"$value\": \"10px\" },\n    \"full\": { \"$type\": \"dimension\", \"$value\": \"9999px\" }\n  },\n  \"shadow\": {\n    \"card\": {\n      \"$type\": \"shadow\",\n      \"$value\": { \"color\": \"#F2F2F2\", \"offsetX\": \"0px\", \"offsetY\": \"4px\", \"blur\": \"15px\", \"spread\": \"0px\" }\n    }\n  }\n}\n", "Extended": "{\n  \"$description\": \"Monierate design tokens \\u2014 extended set (W3C design tokens format). Derived from monierate.fig, 2026-07-12.\",\n  \"color\": {\n    \"brand\": {\n      \"default\": {\n        \"$type\": \"color\",\n        \"$value\": \"#1F75FE\",\n        \"$description\": \"Crayola Blue \\u2014 buttons, links, active tabs, focus glow\"\n      },\n      \"deep\": {\n        \"$type\": \"color\",\n        \"$value\": \"#134698\",\n        \"$description\": \"Royal Navy \\u2014 gradient end, pressed states\"\n      },\n      \"tint\": {\n        \"$type\": \"color\",\n        \"$value\": \"#F2F7FF\",\n        \"$description\": \"Ice Blue \\u2014 brand-tinted panels and banners\"\n      }\n    },\n    \"text\": {\n      \"primary\": {\n        \"$type\": \"color\",\n        \"$value\": \"#000000\",\n        \"$description\": \"Ink Black \\u2014 headings and body\"\n      },\n      \"secondary\": {\n        \"$type\": \"color\",\n        \"$value\": \"#737373\",\n        \"$description\": \"Slate Gray \\u2014 supporting copy, timestamps\"\n      },\n      \"tertiary\": {\n        \"$type\": \"color\",\n        \"$value\": \"#B3B0B0\",\n        \"$description\": \"Silver Gray \\u2014 metadata, placeholders, disabled\"\n      },\n      \"muted\": {\n        \"$type\": \"color\",\n        \"$value\": \"#A3A3A3\",\n        \"$description\": \"Dim Gray \\u2014 least-emphasized captions\"\n      },\n      \"inverse\": {\n        \"$type\": \"color\",\n        \"$value\": \"#FFFFFF\",\n        \"$description\": \"Text on brand and navy surfaces\"\n      }\n    },\n    \"background\": {\n      \"paper\": {\n        \"$type\": \"color\",\n        \"$value\": \"#FFFFFF\",\n        \"$description\": \"Page canvas and cards \\u2014 dominant surface\"\n      },\n      \"surface\": {\n        \"$type\": \"color\",\n        \"$value\": \"#F8F8F8\",\n        \"$description\": \"Fog White \\u2014 alternating section backgrounds\"\n      },\n      \"raised\": {\n        \"$type\": \"color\",\n        \"$value\": \"#FBFBFB\",\n        \"$description\": \"Snow \\u2014 card fill one step off white\"\n      },\n      \"raised-alt\": {\n        \"$type\": \"color\",\n        \"$value\": \"#FAFAFA\",\n        \"$description\": \"Hover surfaces\"\n      },\n      \"cool\": {\n        \"$type\": \"color\",\n        \"$value\": \"#EDF0F4\",\n        \"$description\": \"Powder Blue \\u2014 table headers, chart plot areas\"\n      }\n    },\n    \"border\": {\n      \"default\": {\n        \"$type\": \"color\",\n        \"$value\": \"#F2F2F2\",\n        \"$description\": \"Mist Gray \\u2014 the hairline stroke on nearly everything\"\n      },\n      \"soft\": {\n        \"$type\": \"color\",\n        \"$value\": \"#ECECEC\",\n        \"$description\": \"Inner dividers\"\n      },\n      \"strong\": {\n        \"$type\": \"color\",\n        \"$value\": \"#DDDDDD\",\n        \"$description\": \"Gainsboro \\u2014 input outlines\"\n      },\n      \"mid\": {\n        \"$type\": \"color\",\n        \"$value\": \"#B3B0B0\",\n        \"$description\": \"Emphasized strokes, icon outlines\"\n      }\n    },\n    \"semantic\": {\n      \"positive\": {\n        \"$type\": \"color\",\n        \"$value\": \"#03D418\",\n        \"$description\": \"Signal Green \\u2014 rate increase\"\n      },\n      \"positive-deep\": {\n        \"$type\": \"color\",\n        \"$value\": \"#05A615\",\n        \"$description\": \"Forest Green \\u2014 positive text on washes\"\n      },\n      \"negative\": {\n        \"$type\": \"color\",\n        \"$value\": \"#E31D1C\",\n        \"$description\": \"Signal Red \\u2014 rate decrease\"\n      },\n      \"negative-deep\": {\n        \"$type\": \"color\",\n        \"$value\": \"#CE1312\",\n        \"$description\": \"Crimson \\u2014 error text\"\n      },\n      \"warning\": {\n        \"$type\": \"color\",\n        \"$value\": \"#EFB255\",\n        \"$description\": \"Amber \\u2014 alert accents\"\n      }\n    },\n    \"dark\": {\n      \"canvas\": {\n        \"$type\": \"color\",\n        \"$value\": \"#010C20\",\n        \"$description\": \"Midnight Navy \\u2014 dark app theme canvas, dark footer\"\n      },\n      \"raised\": {\n        \"$type\": \"color\",\n        \"$value\": \"#0E182B\",\n        \"$description\": \"Deep Space \\u2014 dark theme cards\"\n      },\n      \"panel\": {\n        \"$type\": \"color\",\n        \"$value\": \"#263238\",\n        \"$description\": \"Dark theme secondary panels\"\n      }\n    }\n  },\n  \"gradient\": {\n    \"brand\": {\n      \"$type\": \"gradient\",\n      \"$value\": [\n        {\n          \"color\": \"#1F75FE\",\n          \"position\": 0\n        },\n        {\n          \"color\": \"#134698\",\n          \"position\": 1\n        }\n      ],\n      \"$description\": \"Hero panels, feature cards, primary banners\"\n    },\n    \"bitcoin\": {\n      \"$type\": \"gradient\",\n      \"$value\": [\n        {\n          \"color\": \"#F9AA4B\",\n          \"position\": 0\n        },\n        {\n          \"color\": \"#F7931A\",\n          \"position\": 1\n        }\n      ],\n      \"$description\": \"Bitcoin product surfaces\"\n    }\n  },\n  \"font\": {\n    \"family\": {\n      \"head\": {\n        \"$type\": \"fontFamily\",\n        \"$value\": [\n          \"Onest\",\n          \"sans-serif\"\n        ],\n        \"$description\": \"Headings h1\\u2013h6 (600, -1% LS), buttons, tab pills, highlight-card figures\"\n      },\n      \"body\": {\n        \"$type\": \"fontFamily\",\n        \"$value\": [\n          \"Instrument Sans\",\n          \"sans-serif\"\n        ],\n        \"$description\": \"Default on body/html and a/button/input/p/span/div \\u2014 all UI and copy\"\n      },\n      \"mono\": {\n        \"$type\": \"fontFamily\",\n        \"$value\": [\n          \"JetBrains Mono\",\n          \"monospace\"\n        ],\n        \"$description\": \"All numerals: ticker prices, % changes, buy/sell rate cells (700, 17px desktop)\"\n      }\n    },\n    \"weight\": {\n      \"regular\": {\n        \"$type\": \"fontWeight\",\n        \"$value\": 400,\n        \"$description\": \"Body default, ticker numerals\"\n      },\n      \"medium\": {\n        \"$type\": \"fontWeight\",\n        \"$value\": 500,\n        \"$description\": \"UI emphasis\"\n      },\n      \"semibold\": {\n        \"$type\": \"fontWeight\",\n        \"$value\": 600,\n        \"$description\": \"Headings, buttons (Onest)\"\n      },\n      \"bold\": {\n        \"$type\": \"fontWeight\",\n        \"$value\": 700,\n        \"$description\": \"Rate cells (JetBrains Mono)\"\n      }\n    }\n  },\n  \"typography\": {\n    \"caption-2xs\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.body}\",\n        \"fontSize\": \"8px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"label-xs\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.body}\",\n        \"fontSize\": \"10px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      },\n      \"$description\": \"Micro labels, tags\"\n    },\n    \"ui-sm\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.body}\",\n        \"fontSize\": \"12px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      },\n      \"$description\": \"UI default, table cells \\u2014 most-used style in the system\"\n    },\n    \"body\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.body}\",\n        \"fontSize\": \"14px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      },\n      \"$description\": \"Body / row text; use weight 400 and lineHeight 1.5 for long copy\"\n    },\n    \"title-md\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"16px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      },\n      \"$description\": \"Card titles\"\n    },\n    \"subhead\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"18px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"heading-card\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"20px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"heading-section\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"24px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.5,\n        \"letterSpacing\": \"-1.9%\"\n      }\n    },\n    \"title-page\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"28px\",\n        \"fontWeight\": 500,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"title-page-lg\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"32px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"hero\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"48px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"-1%\"\n      }\n    },\n    \"display\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"80px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      },\n      \"$description\": \"Stat numerals (10M, 05M, 10K)\"\n    },\n    \"display-xl\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.head}\",\n        \"fontSize\": \"100px\",\n        \"fontWeight\": 600,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      }\n    },\n    \"rate\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.mono}\",\n        \"fontSize\": \"14px\",\n        \"fontWeight\": 700,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      },\n      \"$description\": \"Rate numerals in tables and cards\"\n    },\n    \"rate-lg\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.mono}\",\n        \"fontSize\": \"17px\",\n        \"fontWeight\": 700,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      },\n      \"$description\": \"Desktop rate-table cells\"\n    },\n    \"ticker\": {\n      \"$type\": \"typography\",\n      \"$value\": {\n        \"fontFamily\": \"{font.family.mono}\",\n        \"fontSize\": \"12px\",\n        \"fontWeight\": 400,\n        \"lineHeight\": 1.0,\n        \"letterSpacing\": \"0%\"\n      },\n      \"$description\": \"Header ticker strip prices and % changes\"\n    }\n  },\n  \"space\": {\n    \"2xs\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"2px\"\n    },\n    \"xs\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"4px\"\n    },\n    \"xs-alt\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"5px\"\n    },\n    \"sm\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"8px\"\n    },\n    \"md\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"10px\",\n      \"$description\": \"Atomic unit \\u2014 default gap and padding across the file\"\n    },\n    \"lg\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"15px\"\n    },\n    \"lg-alt\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"16px\"\n    },\n    \"xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"20px\"\n    },\n    \"2xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"25px\"\n    },\n    \"3xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"30px\"\n    },\n    \"4xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"40px\"\n    }\n  },\n  \"radius\": {\n    \"xs\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"2px\"\n    },\n    \"sm\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"4px\"\n    },\n    \"md\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"5px\",\n      \"$description\": \"Default \\u2014 inputs, chips, small cards\"\n    },\n    \"lg\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"8px\"\n    },\n    \"xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"10px\",\n      \"$description\": \"Cards, panels\"\n    },\n    \"2xl\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"15px\"\n    },\n    \"full\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"9999px\",\n      \"$description\": \"Pill buttons, avatars, toggles\"\n    }\n  },\n  \"border\": {\n    \"hairline\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"1px\",\n      \"$description\": \"Default stroke weight\"\n    },\n    \"focus\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"1.5px\",\n      \"$description\": \"Focused/active outlines\"\n    }\n  },\n  \"shadow\": {\n    \"card\": {\n      \"$type\": \"shadow\",\n      \"$value\": {\n        \"color\": \"#F2F2F2\",\n        \"offsetX\": \"0px\",\n        \"offsetY\": \"4px\",\n        \"blur\": \"15px\",\n        \"spread\": \"0px\"\n      },\n      \"$description\": \"Default card lift \\u2014 gray wash rather than true shadow\"\n    },\n    \"float\": {\n      \"$type\": \"shadow\",\n      \"$value\": {\n        \"color\": \"#0000001A\",\n        \"offsetX\": \"-1px\",\n        \"offsetY\": \"9px\",\n        \"blur\": \"15px\",\n        \"spread\": \"0px\"\n      },\n      \"$description\": \"Dropdowns, floating panels\"\n    },\n    \"brand-glow\": {\n      \"$type\": \"shadow\",\n      \"$value\": {\n        \"color\": \"#1F75FE14\",\n        \"offsetX\": \"0px\",\n        \"offsetY\": \"0px\",\n        \"blur\": \"0px\",\n        \"spread\": \"4px\"\n      },\n      \"$description\": \"Blue halo on active converter/CTA cards\"\n    },\n    \"brand-card\": {\n      \"$type\": \"shadow\",\n      \"$value\": {\n        \"color\": \"#2754BA1A\",\n        \"offsetX\": \"0px\",\n        \"offsetY\": \"10px\",\n        \"blur\": \"28px\",\n        \"spread\": \"0px\"\n      },\n      \"$description\": \"Elevated brand cards\"\n    }\n  },\n  \"size\": {\n    \"button-sm\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"30px\"\n    },\n    \"button-md\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"36px\"\n    },\n    \"button-lg\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"50px\"\n    },\n    \"mobile-nav\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"68px\"\n    }\n  },\n  \"breakpoint\": {\n    \"desktop\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"1512px\",\n      \"$description\": \"Primary desktop canvas; content column ~1372px\"\n    },\n    \"desktop-legacy\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"1440px\"\n    },\n    \"mobile\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"430px\"\n    },\n    \"mobile-legacy\": {\n      \"$type\": \"dimension\",\n      \"$value\": \"375px\"\n    }\n  }\n}" },
+    lang: "json", ext: ".json", names: { "Compact": "design-tokens.compact.json", "Extended": "design-tokens.extended.json" }
+  }
+};
+
+const PALETTE = {
+  "Brand": [
+    ["Crayola Blue", "#1F75FE", "Primary buttons, links, active tabs, chart lines, focus glow — the only interactive hue in the system"],
+    ["Royal Navy", "#134698", "Deep end of the brand gradient, pressed and hover states on filled surfaces"],
+    ["Ice Blue", "#F2F7FF", "Brand-tinted card and banner backgrounds — the quiet way to say 'featured'"]
+  ],
+  "Neutrals": [
+    ["Ink Black", "#000000", "Primary text and headline numerals — every rate and heading resolves to pure black"],
+    ["Slate Gray", "#737373", "Supporting copy, rate context lines, timestamps — the workhorse secondary text"],
+    ["Silver Gray", "#B3B0B0", "Metadata, placeholders, disabled labels; doubles as the mid-weight stroke"],
+    ["Paper White", "#FFFFFF", "Page canvas and cards — the dominant surface across the entire product"],
+    ["Fog White", "#F8F8F8", "Alternating section backgrounds — one step below paper for band variation"],
+    ["Mist Gray", "#F2F2F2", "The default hairline stroke on nearly everything, and the card shadow tint"],
+    ["Powder Blue", "#EDF0F4", "Table headers, cool panels, chart plot areas — a barely-blue gray"],
+    ["Gainsboro", "#DDDDDD", "Input outlines and emphasized dividers — the strongest neutral border"]
+  ],
+  "Semantic": [
+    ["Signal Green", "#03D418", "Rate increase, positive % change chips — never used decoratively"],
+    ["Forest Green", "#05A615", "Positive text on light green washes"],
+    ["Signal Red", "#E31D1C", "Rate decrease, negative % change"],
+    ["Crimson", "#CE1312", "Negative text and error states"],
+    ["Amber", "#EFB255", "Alert accents and warning highlights"]
+  ],
+  "Dark Theme": [
+    ["Midnight Navy", "#010C20", "Mobile app canvas and dark footer surfaces"],
+    ["Deep Space", "#0E182B", "Dark theme cards and raised panels"]
+  ]
+};
+
+const F_HEAD = "'Onest', sans-serif", F_BODY = "'Instrument Sans', sans-serif", F_MONO = "'JetBrains Mono', monospace";
+const TSCALE = [
+  ["display-xl", "The quick brown fox jumps", 100, 600, "1.0", "0", F_HEAD, "Onest"],
+  ["display", "The quick brown fox jumps", 80, 600, "1.0", "0", F_HEAD, "Onest"],
+  ["hero", "The quick brown fox jumps over", 48, 600, "1.0", "-1%", F_HEAD, "Onest"],
+  ["title-page-lg", "The quick brown fox jumps over the lazy dog", 32, 600, "1.0", "-1%", F_HEAD, "Onest"],
+  ["title-page", "The quick brown fox jumps over the lazy dog", 28, 500, "1.0", "-1%", F_HEAD, "Onest"],
+  ["heading-section", "The quick brown fox jumps over the lazy dog", 24, 600, "1.5", "-1.9%", F_HEAD, "Onest"],
+  ["heading-card", "The quick brown fox jumps over the lazy dog", 20, 600, "1.0", "-1%", F_HEAD, "Onest"],
+  ["subhead", "The quick brown fox jumps over the lazy dog", 18, 500, "1.0", "-1%", F_HEAD, "Onest"],
+  ["rate-lg", "₦1,391.86 · +0.06% · $88,674,610.01", 17, 700, "1.0", "0", F_MONO, "JetBrains Mono"],
+  ["title-md", "The quick brown fox jumps over the lazy dog", 16, 600, "1.0", "-1%", F_HEAD, "Onest"],
+  ["body", "The quick brown fox jumps over the lazy dog", 14, 400, "1.0–1.5", "-1%", F_BODY, "Instrument Sans"],
+  ["ui-sm", "The quick brown fox jumps over the lazy dog", 12, 500, "1.0", "-1%", F_BODY, "Instrument Sans"],
+  ["label-xs", "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG", 10, 500, "1.0", "0", F_BODY, "Instrument Sans"]
+];
+const TSHOW_DEFAULT = 8;
+let tscaleOpen = false;
+
+let curTab = "DESIGN.md", curVar = "Compact";
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function highlight(src, lang){
+  let s = esc(src);
+  if (lang === "md") {
+    return s.split("\n").map(l => {
+      if (/^#{1,6} /.test(l)) return '<span class="c-h">'+l+'</span>';
+      if (/^&gt; /.test(l)) return '<span class="c-q">'+l+'</span>';
+      if (/^---/.test(l)) return '<span class="c-cm">'+l+'</span>';
+      return l.replace(/\*\*([^*]+)\*\*/g, '<span class="c-b">**$1**</span>')
+              .replace(/`([^`]+)`/g, '<span class="c-k">`$1`</span>');
+    }).join("\n");
+  }
+  if (lang === "css") {
+    return s.replace(/\/\*[\s\S]*?\*\//g, m => '<span class="c-cm">'+m+'</span>')
+            .replace(/(--[\w-]+)(\s*:)/g, '<span class="c-v">$1</span>$2')
+            .replace(/(@theme|@layer|@import|:root|\[data-theme="dark"\])/g, '<span class="c-t">$1</span>')
+            .replace(/(#[0-9a-fA-F]{3,8})\b/g, '<span class="c-k">$1</span>');
+  }
+  if (lang === "json") {
+    return s.replace(/"([^"]+)"(\s*:)/g, '<span class="c-v">"$1"</span>$2')
+            .replace(/:\s*"([^"]*)"/g, ': <span class="c-s">"$1"</span>')
+            .replace(/:\s*(\d[\d.]*)/g, ': <span class="c-k">$1</span>');
+  }
+  return s;
+}
+
+function render(){
+  const f = FILES[curTab];
+  const vars = Object.keys(f.variants);
+  if (!f.variants[curVar]) curVar = vars[0];
+
+  document.getElementById("tabs").innerHTML = Object.keys(FILES).map(t =>
+    `<button class="tab ${t===curTab?'active':''}" onclick="setTab('${t}')">${t}</button>`).join("");
+
+  document.getElementById("variants").innerHTML = vars.length > 1
+    ? vars.map(v => `<button class="variant ${v===curVar?'active':''}" onclick="setVar('${v}')">${v}</button>`).join(" ")
+    : "";
+
+  document.getElementById("dlLabel").textContent = f.ext;
+  document.getElementById("code").innerHTML = highlight(f.variants[curVar], f.lang);
+}
+
+function setTab(t){ curTab = t; render(); document.querySelector('.codewrap').scrollTop = 0; }
+function setVar(v){ curVar = v; render(); document.querySelector('.codewrap').scrollTop = 0; }
+
+document.getElementById("copyBtn").onclick = async () => {
+  await navigator.clipboard.writeText(FILES[curTab].variants[curVar]);
+  toast("Copied to clipboard");
+};
+document.getElementById("dlBtn").onclick = () => {
+  const f = FILES[curTab];
+  const blob = new Blob([f.variants[curVar]], {type:"text/plain"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = f.names[curVar];
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 1600);
+}
+
+function isLightHex(h){
+  const r = parseInt(h.slice(1,3),16), g = parseInt(h.slice(3,5),16), b = parseInt(h.slice(5,7),16);
+  return (0.299*r + 0.587*g + 0.114*b) > 160;
+}
+function copyHex(h, btn){
+  navigator.clipboard.writeText(h);
+  const orig = btn.innerHTML;
+  btn.innerHTML = "&#10003; Copied";
+  toast(h + " copied");
+  setTimeout(()=>{ btn.innerHTML = orig; }, 1400);
+}
+document.getElementById("palette").innerHTML = Object.entries(PALETTE).map(([grp, items]) =>
+  `<div class="grp-h">${grp}</div>
+   <div class="palette">` +
+   items.map(([n,h,role]) =>
+    `<div class="swatch">
+     <div class="chip ${isLightHex(h)?'light-chip':''}" style="background:${h}">
+       <button class="copybtn" onclick="copyHex('${h}', this)">&#10697; Copy ${h}</button>
+     </div>
+     <div class="nm">${n}</div>
+     <div class="hx" onclick="navigator.clipboard.writeText('${h}');toast('${h} copied')">${h}</div>
+     <div class="role">${role}</div></div>`).join("") +
+   `</div>`).join("");
+
+function renderScale(){
+  const el = document.getElementById("tscale");
+  el.innerHTML = TSCALE.map(([role, spec, size, wt, lh, ls, ff, fname], i) => {
+    const shown = tscaleOpen || i < TSHOW_DEFAULT;
+    const dispSize = Math.min(size, 64); // clamp so 100px fits the panel
+    return `<div class="tstep ${shown?'':'hid'}">
+      <div class="thead"><span>${role}</span><span>${fname} · ${size}px · ${wt} · ${lh}${ls!=='0' ? ' · '+ls : ''}</span></div>
+      <div class="spec" style="font-family:${ff}; font-size:${dispSize}px; font-weight:${wt}; letter-spacing:${ls==='0'?'0':(ls==='-1.9%'?'-0.019em':'-0.01em')}; line-height:1.15;">${spec}</div>
+    </div>`;
+  }).join("") +
+  `<button class="tshow" onclick="tscaleOpen=!tscaleOpen;renderScale()">${tscaleOpen ? 'Show fewer steps' : 'Show all '+TSCALE.length+' steps'}</button>`;
+}
+renderScale();
+
+/* ---------- theme ---------- */
+function applyTheme(t){
+  document.documentElement.dataset.theme = t;
+  document.getElementById("themeIcon").innerHTML = t === "light" ? "&#9789;" : "&#9788;";
+}
+let theme;
+try { theme = localStorage.getItem("mr-theme"); } catch(e) {}
+if (!theme) theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+applyTheme(theme);
+document.getElementById("themeBtn").onclick = () => {
+  theme = theme === "light" ? "dark" : "light";
+  applyTheme(theme);
+  try { localStorage.setItem("mr-theme", theme); } catch(e) {}
+};
+
+render();
+</script>
+</body>
+</html>

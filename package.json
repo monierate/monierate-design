@@ -1,0 +1,12 @@
+{
+  "name": "monierate-design",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monierate design system — tokens, generated CSS, and style-reference site",
+  "scripts": {
+    "build:tokens": "node build/build-tokens.js",
+    "build:site": "node build/build-site.js",
+    "build": "npm run build:tokens && npm run build:site"
+  }
+}

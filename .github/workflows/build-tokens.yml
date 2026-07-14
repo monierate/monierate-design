@@ -1,0 +1,40 @@
+name: Build design tokens
+
+# Runs whenever tokens change (e.g. Tokens Studio pushes from Figma)
+# or the docs/template change. Regenerates the CSS outputs and the
+# style-reference site, then commits the results back to the branch.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tokens/**"
+      - "design.*.md"
+      - "design-tokens.*.json"
+      - "build/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build token outputs and site
+        run: npm run build
+
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add monierate.variables.css monierate.tailwind.css index.html
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: rebuild token outputs [skip ci]"
+          git push

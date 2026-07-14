@@ -1,0 +1,567 @@
+{
+  "$description": "Monierate design tokens \u2014 extended set (W3C design tokens format). Derived from monierate.fig, 2026-07-12.",
+  "color": {
+    "brand": {
+      "default": {
+        "$type": "color",
+        "$value": "#1F75FE",
+        "$description": "Crayola Blue \u2014 buttons, links, active tabs, focus glow"
+      },
+      "deep": {
+        "$type": "color",
+        "$value": "#134698",
+        "$description": "Royal Navy \u2014 gradient end, pressed states"
+      },
+      "tint": {
+        "$type": "color",
+        "$value": "#F2F7FF",
+        "$description": "Ice Blue \u2014 brand-tinted panels and banners"
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "#000000",
+        "$description": "Ink Black \u2014 headings and body"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#737373",
+        "$description": "Slate Gray \u2014 supporting copy, timestamps"
+      },
+      "tertiary": {
+        "$type": "color",
+        "$value": "#B3B0B0",
+        "$description": "Silver Gray \u2014 metadata, placeholders, disabled"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "#A3A3A3",
+        "$description": "Dim Gray \u2014 least-emphasized captions"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Text on brand and navy surfaces"
+      }
+    },
+    "background": {
+      "paper": {
+        "$type": "color",
+        "$value": "#FFFFFF",
+        "$description": "Page canvas and cards \u2014 dominant surface"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#F8F8F8",
+        "$description": "Fog White \u2014 alternating section backgrounds"
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "#FBFBFB",
+        "$description": "Snow \u2014 card fill one step off white"
+      },
+      "raised-alt": {
+        "$type": "color",
+        "$value": "#FAFAFA",
+        "$description": "Hover surfaces"
+      },
+      "cool": {
+        "$type": "color",
+        "$value": "#EDF0F4",
+        "$description": "Powder Blue \u2014 table headers, chart plot areas"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "#F2F2F2",
+        "$description": "Mist Gray \u2014 the hairline stroke on nearly everything"
+      },
+      "soft": {
+        "$type": "color",
+        "$value": "#ECECEC",
+        "$description": "Inner dividers"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "#DDDDDD",
+        "$description": "Gainsboro \u2014 input outlines"
+      },
+      "mid": {
+        "$type": "color",
+        "$value": "#B3B0B0",
+        "$description": "Emphasized strokes, icon outlines"
+      }
+    },
+    "semantic": {
+      "positive": {
+        "$type": "color",
+        "$value": "#03D418",
+        "$description": "Signal Green \u2014 rate increase"
+      },
+      "positive-deep": {
+        "$type": "color",
+        "$value": "#05A615",
+        "$description": "Forest Green \u2014 positive text on washes"
+      },
+      "negative": {
+        "$type": "color",
+        "$value": "#E31D1C",
+        "$description": "Signal Red \u2014 rate decrease"
+      },
+      "negative-deep": {
+        "$type": "color",
+        "$value": "#CE1312",
+        "$description": "Crimson \u2014 error text"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#EFB255",
+        "$description": "Amber \u2014 alert accents"
+      }
+    },
+    "dark": {
+      "canvas": {
+        "$type": "color",
+        "$value": "#010C20",
+        "$description": "Midnight Navy \u2014 dark app theme canvas, dark footer"
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "#0E182B",
+        "$description": "Deep Space \u2014 dark theme cards"
+      },
+      "panel": {
+        "$type": "color",
+        "$value": "#263238",
+        "$description": "Dark theme secondary panels"
+      }
+    }
+  },
+  "gradient": {
+    "brand": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "#1F75FE",
+          "position": 0
+        },
+        {
+          "color": "#134698",
+          "position": 1
+        }
+      ],
+      "$description": "Hero panels, feature cards, primary banners"
+    },
+    "bitcoin": {
+      "$type": "gradient",
+      "$value": [
+        {
+          "color": "#F9AA4B",
+          "position": 0
+        },
+        {
+          "color": "#F7931A",
+          "position": 1
+        }
+      ],
+      "$description": "Bitcoin product surfaces"
+    }
+  },
+  "font": {
+    "family": {
+      "head": {
+        "$type": "fontFamily",
+        "$value": [
+          "Onest",
+          "sans-serif"
+        ],
+        "$description": "Headings h1\u2013h6 (600, -1% LS), buttons, tab pills, highlight-card figures"
+      },
+      "body": {
+        "$type": "fontFamily",
+        "$value": [
+          "Instrument Sans",
+          "sans-serif"
+        ],
+        "$description": "Default on body/html and a/button/input/p/span/div \u2014 all UI and copy"
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": [
+          "JetBrains Mono",
+          "monospace"
+        ],
+        "$description": "All numerals: ticker prices, % changes, buy/sell rate cells (700, 17px desktop)"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400,
+        "$description": "Body default, ticker numerals"
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500,
+        "$description": "UI emphasis"
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600,
+        "$description": "Headings, buttons (Onest)"
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700,
+        "$description": "Rate cells (JetBrains Mono)"
+      }
+    }
+  },
+  "typography": {
+    "caption-2xs": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.body}",
+        "fontSize": "8px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "label-xs": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.body}",
+        "fontSize": "10px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      },
+      "$description": "Micro labels, tags"
+    },
+    "ui-sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.body}",
+        "fontSize": "12px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      },
+      "$description": "UI default, table cells \u2014 most-used style in the system"
+    },
+    "body": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.body}",
+        "fontSize": "14px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      },
+      "$description": "Body / row text; use weight 400 and lineHeight 1.5 for long copy"
+    },
+    "title-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "16px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      },
+      "$description": "Card titles"
+    },
+    "subhead": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "18px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "heading-card": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "20px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "heading-section": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "24px",
+        "fontWeight": 600,
+        "lineHeight": 1.5,
+        "letterSpacing": "-1.9%"
+      }
+    },
+    "title-page": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "28px",
+        "fontWeight": 500,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "title-page-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "32px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "hero": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "48px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "-1%"
+      }
+    },
+    "display": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "80px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      },
+      "$description": "Stat numerals (10M, 05M, 10K)"
+    },
+    "display-xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.head}",
+        "fontSize": "100px",
+        "fontWeight": 600,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      }
+    },
+    "rate": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontSize": "14px",
+        "fontWeight": 700,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      },
+      "$description": "Rate numerals in tables and cards"
+    },
+    "rate-lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontSize": "17px",
+        "fontWeight": 700,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      },
+      "$description": "Desktop rate-table cells"
+    },
+    "ticker": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.family.mono}",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "lineHeight": 1.0,
+        "letterSpacing": "0%"
+      },
+      "$description": "Header ticker strip prices and % changes"
+    }
+  },
+  "space": {
+    "2xs": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "xs-alt": {
+      "$type": "dimension",
+      "$value": "5px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "10px",
+      "$description": "Atomic unit \u2014 default gap and padding across the file"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "15px"
+    },
+    "lg-alt": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "25px"
+    },
+    "3xl": {
+      "$type": "dimension",
+      "$value": "30px"
+    },
+    "4xl": {
+      "$type": "dimension",
+      "$value": "40px"
+    }
+  },
+  "radius": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "2px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "5px",
+      "$description": "Default \u2014 inputs, chips, small cards"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "10px",
+      "$description": "Cards, panels"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "15px"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "9999px",
+      "$description": "Pill buttons, avatars, toggles"
+    }
+  },
+  "border": {
+    "hairline": {
+      "$type": "dimension",
+      "$value": "1px",
+      "$description": "Default stroke weight"
+    },
+    "focus": {
+      "$type": "dimension",
+      "$value": "1.5px",
+      "$description": "Focused/active outlines"
+    }
+  },
+  "shadow": {
+    "card": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#F2F2F2",
+        "offsetX": "0px",
+        "offsetY": "4px",
+        "blur": "15px",
+        "spread": "0px"
+      },
+      "$description": "Default card lift \u2014 gray wash rather than true shadow"
+    },
+    "float": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#0000001A",
+        "offsetX": "-1px",
+        "offsetY": "9px",
+        "blur": "15px",
+        "spread": "0px"
+      },
+      "$description": "Dropdowns, floating panels"
+    },
+    "brand-glow": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#1F75FE14",
+        "offsetX": "0px",
+        "offsetY": "0px",
+        "blur": "0px",
+        "spread": "4px"
+      },
+      "$description": "Blue halo on active converter/CTA cards"
+    },
+    "brand-card": {
+      "$type": "shadow",
+      "$value": {
+        "color": "#2754BA1A",
+        "offsetX": "0px",
+        "offsetY": "10px",
+        "blur": "28px",
+        "spread": "0px"
+      },
+      "$description": "Elevated brand cards"
+    }
+  },
+  "size": {
+    "button-sm": {
+      "$type": "dimension",
+      "$value": "30px"
+    },
+    "button-md": {
+      "$type": "dimension",
+      "$value": "36px"
+    },
+    "button-lg": {
+      "$type": "dimension",
+      "$value": "50px"
+    },
+    "mobile-nav": {
+      "$type": "dimension",
+      "$value": "68px"
+    }
+  },
+  "breakpoint": {
+    "desktop": {
+      "$type": "dimension",
+      "$value": "1512px",
+      "$description": "Primary desktop canvas; content column ~1372px"
+    },
+    "desktop-legacy": {
+      "$type": "dimension",
+      "$value": "1440px"
+    },
+    "mobile": {
+      "$type": "dimension",
+      "$value": "430px"
+    },
+    "mobile-legacy": {
+      "$type": "dimension",
+      "$value": "375px"
+    }
+  }
+}

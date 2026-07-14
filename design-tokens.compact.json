@@ -1,0 +1,65 @@
+{
+  "$description": "Monierate design tokens — compact set (W3C design tokens format)",
+  "color": {
+    "brand": { "$type": "color", "$value": "#1F75FE" },
+    "brand-deep": { "$type": "color", "$value": "#134698" },
+    "ink": { "$type": "color", "$value": "#000000" },
+    "text-secondary": { "$type": "color", "$value": "#737373" },
+    "text-tertiary": { "$type": "color", "$value": "#B3B0B0" },
+    "paper": { "$type": "color", "$value": "#FFFFFF" },
+    "surface": { "$type": "color", "$value": "#F8F8F8" },
+    "surface-tint": { "$type": "color", "$value": "#F2F7FF" },
+    "border": { "$type": "color", "$value": "#F2F2F2" },
+    "border-strong": { "$type": "color", "$value": "#DDDDDD" },
+    "positive": { "$type": "color", "$value": "#03D418" },
+    "negative": { "$type": "color", "$value": "#E31D1C" },
+    "warning": { "$type": "color", "$value": "#EFB255" },
+    "navy": { "$type": "color", "$value": "#010C20" }
+  },
+  "font": {
+    "family": {
+      "head": { "$type": "fontFamily", "$value": ["Onest", "sans-serif"] },
+      "body": { "$type": "fontFamily", "$value": ["Instrument Sans", "sans-serif"] },
+      "mono": { "$type": "fontFamily", "$value": ["JetBrains Mono", "monospace"] }
+    },
+    "weight": {
+      "regular": { "$type": "fontWeight", "$value": 400 },
+      "medium": { "$type": "fontWeight", "$value": 500 },
+      "semibold": { "$type": "fontWeight", "$value": 600 },
+      "bold": { "$type": "fontWeight", "$value": 700 }
+    },
+    "size": {
+      "xs": { "$type": "dimension", "$value": "10px" },
+      "sm": { "$type": "dimension", "$value": "12px" },
+      "base": { "$type": "dimension", "$value": "14px" },
+      "md": { "$type": "dimension", "$value": "16px" },
+      "lg": { "$type": "dimension", "$value": "18px" },
+      "xl": { "$type": "dimension", "$value": "20px" },
+      "2xl": { "$type": "dimension", "$value": "24px" },
+      "3xl": { "$type": "dimension", "$value": "28px" },
+      "4xl": { "$type": "dimension", "$value": "32px" },
+      "5xl": { "$type": "dimension", "$value": "48px" },
+      "display": { "$type": "dimension", "$value": "100px" }
+    }
+  },
+  "space": {
+    "xs": { "$type": "dimension", "$value": "4px" },
+    "sm": { "$type": "dimension", "$value": "8px" },
+    "md": { "$type": "dimension", "$value": "10px" },
+    "lg": { "$type": "dimension", "$value": "15px" },
+    "xl": { "$type": "dimension", "$value": "20px" },
+    "2xl": { "$type": "dimension", "$value": "30px" }
+  },
+  "radius": {
+    "md": { "$type": "dimension", "$value": "5px" },
+    "lg": { "$type": "dimension", "$value": "8px" },
+    "xl": { "$type": "dimension", "$value": "10px" },
+    "full": { "$type": "dimension", "$value": "9999px" }
+  },
+  "shadow": {
+    "card": {
+      "$type": "shadow",
+      "$value": { "color": "#F2F2F2", "offsetX": "0px", "offsetY": "4px", "blur": "15px", "spread": "0px" }
+    }
+  }
+}
